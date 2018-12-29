@@ -25,7 +25,6 @@ plot(basis_ut,title="MM20" , color=#C0C0C0)
 p1_ut = plot(upper_ut,title="BB18_U", transp=10,linewidth=3, color=linecolor1)
 p2_ut = plot(lower_ut, title="BB18_L", transp=10,linewidth=3,color=linecolor2)
 
-
 // set bollinger band to 6x18 = 108 periods --> for UT+1
 length_UTSUP = input(108, minval=1)
 src_UTSUP = input(close, title="Source")
