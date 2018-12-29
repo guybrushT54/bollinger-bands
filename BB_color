@@ -1,0 +1,49 @@
+//@version=3
+study(shorttitle="BB_val", title="Bollinger Bands", overlay=true)
+
+//#71D6FF
+//#9A9A9A  bleu
+//#EB8836  orange
+//#B8DB49  vert
+
+// bande de boll à 18 periode
+length_ut = input(18, minval=1)
+src_ut = input(close, title="Source")
+mult_ut = input(2.0, minval=0.001, maxval=50)
+basis_ut = sma(src_ut, length_ut)
+dev_ut = mult_ut * stdev(src_ut, length_ut)
+upper_ut = basis_ut + dev_ut
+lower_ut = basis_ut - dev_ut
+
+dCandles  = input(2, minval=2, title="Candles to test Market Direction")
+linecolor1 = rising(upper_ut,dCandles) ? #71D6FF : #C0C0C0 
+linecolor2 = falling(lower_ut,dCandles) ? #71D6FF : #C0C0C0 
+//data = close >= open
+//plotshape(data, color=lime, style=shape.arrowup, text="Buy")
+
+
+//price = ema(src_ut, length_ut)
+//linecolor = price >= basis_ut ? #C0C0C0 : red
+plot(basis_ut,title="MM20" , color=#C0C0C0)
+//plot(price,title="MM20" , color=red)
+p1_ut = plot(upper_ut,title="BB18_U", transp=10,linewidth=3, color=linecolor1)
+p2_ut = plot(lower_ut, title="BB18_L", transp=10,linewidth=3,color=linecolor2)
+//p1_ut = plot(upper_ut,title="BB18_U",  color=#C0C0C0)
+//p2_ut = plot(lower_ut, title="BB18_L", color=#C0C0C0)
+//data = close >= open
+//plotshape(data, color=lime, style=shape.arrowup, text="Buy")
+//fill(p1, p2)
+
+
+// bande de boll à 18*6 = 108 periode
+length_UTSUP = input(108, minval=1)
+src_UTSUP = input(close, title="Source")
+mult_UTSUP = input(2.0, minval=0.001, maxval=50)
+basis_UTSUP = sma(src_UTSUP, length_UTSUP)
+dev_UTSUP = mult_UTSUP * stdev(src_UTSUP, length_UTSUP)
+upper_UTSUP = basis_UTSUP + dev_UTSUP
+lower_UTSUP = basis_UTSUP - dev_UTSUP
+//plot(basis_UTSUP, color=red)
+p1_UTSUP = plot(upper_UTSUP, title="BB108_U", color=white)
+p2_UTSUP = plot(lower_UTSUP, title="BB108_L", color=white)
+fill(p1_UTSUP, p2_UTSUP, color=#C0C0C0)
